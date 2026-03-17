@@ -19,7 +19,7 @@ public class Main {
         switch (choice) {
             case 2: repository = new H2Repository(); break;
             case 3: repository = new MySqlRepository(); break;
-            default: repository = new InMemoryRepository(); break;
+            default: repository = new InMemoryListRepository(); break;
         }
 
         // INJECTION PHASE

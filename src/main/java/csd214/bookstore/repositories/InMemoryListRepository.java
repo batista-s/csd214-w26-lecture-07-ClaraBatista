@@ -3,7 +3,7 @@ import csd214.bookstore.entities.ProductEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryRepository implements IRepository<ProductEntity> {
+public class InMemoryListRepository implements IRepository<ProductEntity> {
     private List<ProductEntity> db = new ArrayList<>();
     private Long idCounter = 1L;
 
