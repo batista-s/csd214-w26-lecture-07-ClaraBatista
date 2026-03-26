@@ -83,6 +83,7 @@ public class App {
         System.out.println("4. Ticket");
         System.out.println("5. Pen");
         System.out.println("6. Notebook");
+        System.out.println("7. Music");
         System.out.println("99. Back");
 
         int choice = getIntInput();
@@ -151,6 +152,9 @@ public class App {
                     nEnt.setPageCount(nPojo.getPageCount());
                     nEnt.setName(nPojo.getPageCount() + "pg " + nPojo.getBrand() + " Notebook");
                     repository.save(nEnt);
+                    break;
+                case 7:
+
                     break;
                 default:
                     System.out.println("Invalid type.");
