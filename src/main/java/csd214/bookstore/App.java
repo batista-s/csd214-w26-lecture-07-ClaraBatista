@@ -5,6 +5,7 @@ import csd214.bookstore.entities.*;
 import csd214.bookstore.pojos.*;
 import csd214.bookstore.repositories.IRepository;
 import csd214.bookstore.services.BookstoreService;
+import csd214.bookstore.services.DigitalMusicService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,11 +13,13 @@ import java.util.Scanner;
 public class App {
     private IRepository<ProductEntity> repository;
     private BookstoreService service; // The Chef
+    private DigitalMusicService dmService;
 
     // INJECTION: App doesn't use the 'new' keyword for repos anymore
     public App(IRepository<ProductEntity> repository) {
         this.repository = repository;
         this.service = new BookstoreService(repository);
+        this.dmService = new DigitalMusicService(repository);
     }
     // UI & Logic
     private CashTill cashTill = new CashTill();
@@ -154,7 +157,17 @@ public class App {
                     repository.save(nEnt);
                     break;
                 case 7:
-
+                    DigitalMusic dmPojo = new DigitalMusic();
+                    dmPojo.initialize(input);
+                    DigitalMusicEntity dmEnt = new DigitalMusicEntity();
+                    dmEnt.setTitle(dmPojo.getTitle());
+                    dmEnt.setArtist(dmPojo.getArtist());
+                    dmEnt.setGenre(dmPojo.getGenre());
+                    dmEnt.setYear(dmPojo.getYear());
+                    dmEnt.setPrice(dmPojo.getPrice());
+                    dmEnt.setLink(dmPojo.getLink());
+                    dmEnt.setName("Digital Music: " + dmPojo.getTitle());
+                    repository.save(dmEnt);
                     break;
                 default:
                     System.out.println("Invalid type.");
@@ -276,6 +289,8 @@ public class App {
         // 5. DELEGATION: Pass the ID to the Service (The Chef)
         // The App doesn't care HOW the sale happens, it just tells the service to do it.
         service.performSale(dbId);
+
+        dmService.incrementDownloadCount(dbId);
 
         // 6. Update the UI-side Cash Till
         // We create a temporary SaleableItem wrapper to pass the price to the Till

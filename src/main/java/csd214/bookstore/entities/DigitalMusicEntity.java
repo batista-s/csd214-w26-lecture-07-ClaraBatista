@@ -16,6 +16,7 @@ public class DigitalMusicEntity extends MusicCollectionEntity {
     private int downloads;
 
     public DigitalMusicEntity() {
+        this.downloads = 0;
     }
 
     public DigitalMusicEntity(double price, String title, String artist, String genre, int year, String link, String name) {
@@ -40,6 +41,7 @@ public class DigitalMusicEntity extends MusicCollectionEntity {
     public String toString() {
         return "DigitalMusicEntity{" +
                 "link='" + link + '\'' +
+                "donwloads=" + downloads + '\'' +
                 '}' + super.toString();
     }
 
