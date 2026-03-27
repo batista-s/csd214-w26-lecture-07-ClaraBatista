@@ -80,3 +80,26 @@ src/main/java/csd214/bookstore/
 
 ## ⚖️ License
 Educational use for CSD214 - Sault College.
+
+## LAB 5 Reflections
+
+1. No, because App.java and services are database agnostic
+
+2. Using a HashMap is more optimal for large datasets because lookups 
+and inserts are average O(1), whereas a list based repository requires O(n) scans for findById 
+and removals by id. That difference becomes significant as the dataset grows. However, maps trade off memory overhead and hash maintenance.
+
+3. RAM-based repositories are volatile and excellent for fast iteration, unit tests, 
+and isolated demos because they are simple, deterministic, and easy to reset. Persistent 
+stores like MySQL provide durability, ACID guarantees, backup and recovery, and are 
+required for production data. Moving from in-memory to a relational store 
+introduces schema management, connection pooling, transaction boundaries, and operational concerns (migrations, backups, monitoring), 
+so the repository abstraction protects the app from those complexities until you opt into them.
+
+4. Decoupling via interfaces and DI makes large codebase changes far safer and cheaper.
+A single wiring change at startup can replace a core subsystem without touching business
+logic, which reduces the scope of code reviews and the likelihood of regression bugs.
+
+5. Modularizing code (separation of concerns and SRP) improves maintainability, testability, 
+and onboarding. When repositories, services, and presentation are clearly separated, new contributors can focus on one 
+area without understanding the entire stack.
